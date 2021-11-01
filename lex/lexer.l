@@ -14,9 +14,14 @@ DIGIT             [0-9]
 LETTER            [a-zA-Z]
 ALPHANUM          {LETTER}|{DIGIT}
 NUMBER            [1-9][0-9]*|0
+
 ID                _?[LETTER]([ALPHANUM]*|[_]*[ALPHANUM])*[^_]
+ICONST            ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([OB][1][0-1]*)*
+// todo cf oha etc..
+RCONST            ((([1-9][0-9]*|0)*.([1-9][0-9]*|0)+)(([E][+-]?([1-9][0-9]*|0)+)?|([1-9][0-9]*|0)))|(([0B]|[0H])([0-9]*.([1-9][0-9]*|0)+))
+CCONST
+
 WHITESPACE        [ \t]
-ICONST           ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([OB][1][0-1]*)*
 
 alpha             [a-zA-Z]
 nalpha            [^a-zA-Z]
