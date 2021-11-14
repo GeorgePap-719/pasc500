@@ -8,7 +8,7 @@
 
 void token_print(int token_id);
 
-int errors = 0;
+
 %}
 
 
@@ -18,7 +18,7 @@ ALPHANUM          {LETTER}|{DIGIT}
 NUMBER            [1-9][0-9]*|0
 HEXDIGIT          [0-9A-F]
 
-ID                _?[LETTER]([ALPHANUM]*|[_]*[ALPHANUM])*[^_]
+ID                _?[a-zA-Z]([a-zA-Z0-9]*|[_]*[a-zA-Z0-9])*[^_]
 ICONST            ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([OB][1][0-1]*)*
 RCONST            ((([1-9][0-9]*|0)*[.]([1-9][0-9]*|0))(([E][-]?([1-9][0-9]*|0))?|([1-9][0-9]*|0)))|(([1-9][0-9]*([E][-]([0-9])*)))|(([O][B]|[O][H])([0-9A-F]*[.](([1-9][0-9])|[0-9A-F])*|0))
 BCONST            TRUE|FALSE
@@ -104,6 +104,8 @@ CCONST          { token_print(T_CCONST); return T_CCONST; }
 
 "IN"            { token_print(T_INOP); return T_INOP; }
 
+
+
 "("             { token_print(T_LPAREN); return T_LPAREN; }
 ")"             { token_print(T_RPAREN); return T_RPAREN; }
 ";"             { token_print(T_SEMI); return T_SEMI; }
@@ -121,7 +123,7 @@ CCONST          { token_print(T_CCONST); return T_CCONST; }
 
 <<EOF>>         { token_print(T_EOF); return T_EOF; }
 
-.               { print("Unrecognised character at line %d!\n", yylineno); }
+.               { printf("Unrecognised character at line %d!\n", yylineno); }
 
 %%
 
@@ -139,11 +141,9 @@ int main(int argc, char* argv[]) {
 		token = yylex();
     }while(token != T_EOF);
 
-    if(error_count > 0){
-        printf("Failed to analyze the program due to %d errors\n", error_count);
-    }else{
-        printf("Program analyzed successfully\n");
-    }
+
+    printf("Program analyzed successfully\n");
+
     fclose(yyin);
     yyterminate();
 }
