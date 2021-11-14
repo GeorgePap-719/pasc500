@@ -55,6 +55,9 @@ dkms.conf
 # Intelij
 .idea/
 
+# Vs code
+cmake-build-debug/
+CMakeLists.txt
 
 
 
