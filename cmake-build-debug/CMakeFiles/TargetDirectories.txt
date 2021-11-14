@@ -1,0 +1,3 @@
+/home/gp/workspaces/george-719/github/pasc500/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gp/workspaces/george-719/github/pasc500/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/gp/workspaces/george-719/github/pasc500/cmake-build-debug/CMakeFiles/pasc500.dir

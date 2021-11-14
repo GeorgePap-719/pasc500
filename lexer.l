@@ -11,6 +11,9 @@ void token_print(int token_id);
 
 %}
 
+%option case-insensitive
+%option noyywrap
+%option yylineno
 
 DIGIT             [0-9]
 LETTER            [a-zA-Z]
@@ -18,10 +21,10 @@ ALPHANUM          {LETTER}|{DIGIT}
 NUMBER            [1-9][0-9]*|0
 HEXDIGIT          [0-9A-F]
 
-ID                _?[a-zA-Z]([a-zA-Z0-9]*|[_]*[a-zA-Z0-9])*[^_]
-ICONST            ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([OB][1][0-1]*)*
-RCONST            ((([1-9][0-9]*|0)*[.]([1-9][0-9]*|0))(([E][-]?([1-9][0-9]*|0))?|([1-9][0-9]*|0)))|(([1-9][0-9]*([E][-]([0-9])*)))|(([O][B]|[O][H])([0-9A-F]*[.](([1-9][0-9])|[0-9A-F])*|0))
-BCONST            TRUE|FALSE
+ID                _?[a-zA-Z]([a-zA-Z0-9]*|[_]*[a-zA-Z0-9]*[a-zA-Z0-9])*
+ICONST            ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([0B][1][0-1]*)*
+RCONST            ((([1-9][0-9]*|0)*[.]([1-9][0-9]*|0))(([E][-]?([1-9][0-9]*|0))?|([1-9][0-9]*|0)))|(([1-9][0-9]*([E][-]([0-9])*)))|(([0][B]|[0][H])([0-9A-F]*[.](([1-9][0-9])|[0-9A-F])*|0))
+BCONST            (TRUE)|(FALSE)
 CCONST            \'(([^\\])|(\\[ntfrbv]?))\'
 
 WHITESPACE        [ \t]
@@ -34,12 +37,6 @@ hex_digit         [0-9A-F]
 hex_digitn        [1-9A-F]
 alphanum          [a-zA-Z0-9]
 alphanumu         [a-zA-z0-9_]
-
-
-
-%option case-insensitive
-%option noyywrap
-%option yylineno
 
 %%
 
@@ -76,12 +73,12 @@ alphanumu         [a-zA-z0-9_]
 
 
 
-ID              { token_print(T_ID); return T_ID; }
+{ID}            { token_print(T_ID); return T_ID; }
 
-ICONST          { token_print(T_ICONST); return T_ICONST; }
-RCONST          { token_print(T_RCONST); return T_RCONST; }
-BCONST          { token_print(T_BCONST); return T_BCONST; }
-CCONST          { token_print(T_CCONST); return T_CCONST; }
+{ICONST}        { token_print(T_ICONST); return T_ICONST; }
+{RCONST}        { token_print(T_RCONST); return T_RCONST; }
+{BCONST}        { token_print(T_BCONST); return T_BCONST; }
+{CCONST}        { token_print(T_CCONST); return T_CCONST; }
 
 ">"             { token_print(T_RELOP); return T_RELOP; }
 ">="            { token_print(T_RELOP); return T_RELOP; }
@@ -120,6 +117,9 @@ CCONST          { token_print(T_CCONST); return T_CCONST; }
 
 
 
+[ \t]           { }
+[\n]            { }
+\r\n            { }
 
 <<EOF>>         { token_print(T_EOF); return T_EOF; }
 
