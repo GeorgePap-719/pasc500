@@ -7,13 +7,19 @@
 #include <math.h>
 
 void token_print(int token_id);
-
+int str_to_int(char *str);
+float str_to_float(char *str);
+float BinToFloat(char* str);
+float OctToFloat(char* str);
+float HexToFloat(char*str);
 
 %}
 
 %option case-insensitive
 %option noyywrap
 %option yylineno
+
+%x STRING
 
 DIGIT             [0-9]
 LETTER            [a-zA-Z]
@@ -80,6 +86,8 @@ alphanumu         [a-zA-z0-9_]
 {BCONST}        { token_print(T_BCONST); return T_BCONST; }
 {CCONST}        { token_print(T_CCONST); return T_CCONST; }
 
+
+
 ">"             { token_print(T_RELOP); return T_RELOP; }
 ">="            { token_print(T_RELOP); return T_RELOP; }
 "<"             { token_print(T_RELOP); return T_RELOP; }
@@ -100,6 +108,16 @@ alphanumu         [a-zA-z0-9_]
 "NOT"           { token_print(T_NOTOP); return T_NOTOP; }
 
 "IN"            { token_print(T_INOP); return T_INOP; }
+
+
+\"              { BEGIN(STRING); }
+<STRING>\"      { BEGIN(INITIAL); }
+<STRING>(\\\n|\\\r\n) {  }
+<STRING>(\\.|[^"\\]) { printf("Found word: %s\n", yytext); }
+<STRING>(\n|\r\n)   { printf("New line found without \\ \n"); }
+<STRING><<EOF>>     { printf("Unterminated string");      }
+<STRING>.           { printf("Unknown character."); }
+
 
 
 
@@ -149,13 +167,78 @@ int main(int argc, char* argv[]) {
 }
 
 void token_print(int token_id) {
+    //if (token_id == T_ICONST) {
+     //   printf("[Line %d] INTEGER TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_int(yytext));
+    //} else if (token_id == T_RCONST) {
+     //   printf("[Line %d] FLOAT TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_float(yytext));
+    //} else {
+     // printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
+    //}
+
     printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
 }
 
+int str_to_int(char *str) {
+    if ( strncmp(str, "0o", 2) == 0) {
+        return (int) strtoll(&str[2], NULL, 8);
+    } else if (strncmp(str, "0b", 2) == 0) {
+        return (int) strtoll(&str[2], NULL, 2);
+    } else if (strncmp(str, "0x", 2) == 0) {
+        return (int) strtoll(&str[2], NULL, 16);
+    } else {
+        return (int) strtoll(str, NULL, 10);
+    }
+}
 
+float str_to_float(char *str) {
 
+     if (strncmp(str, "0B", 2) == 0) { // bin
+        return (float) BinToFloat(str);
+    } else if (strncmp(str, "0H", 2) == 0) { //hex
+        return (float) HexToFloat(str);
+    } else { //dec
+        return (float) strtof(str, NULL);
+    }
+}
 
+float BinToFloat(char* str){
+    float number = 0.0;
+    int i,length_real;
+    char *character;
+    character = strchr(str,'.');
+    length_real = strlen(character)-1;
+    number = (int)strtol(&str[2],&character,2);
+    for(i=1;i<length_real;i++){
+        number += (character[i] - '0') * (1/pow(2,i));
+    }
+    return number;
+}
 
+float OctToFloat(char* str){
+    float number = 0.0;
+    int i,length_real;
+    char *character;
+    character = strchr(str,'.');
+    length_real = strlen(character)-1;
+    number = (int)strtol(&str[2],&character,8);
+    for(i=1;i<=length_real;i++){
+        number += (character[i] - '0') * (1/pow(8,i));
+    }
+    return number;
+}
 
-
-
+float HexToFloat(char*str){
+    float number = 0.0;
+    int i,length_real;
+    char *character;
+    character = strchr(str,'.');
+    length_real = strlen(character)-1;
+    number = (int)strtol(&str[2],&character,16);
+    for(i=1;i<=length_real;i++){
+        if(character[i] <= '9')
+			number += (character[i] - '0') * (1/pow(16,i));
+		else
+			number += (character[i] + 10 - 'A') * (1/pow(16,i));
+	}
+    return number;
+}
