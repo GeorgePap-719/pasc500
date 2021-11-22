@@ -2,6 +2,7 @@
 #include "lexer.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
@@ -167,15 +168,15 @@ int main(int argc, char* argv[]) {
 }
 
 void token_print(int token_id) {
-    //if (token_id == T_ICONST) {
-     //   printf("[Line %d] INTEGER TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_int(yytext));
-    //} else if (token_id == T_RCONST) {
-     //   printf("[Line %d] FLOAT TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_float(yytext));
-    //} else {
-     // printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
-    //}
+    if (token_id == T_ICONST) {
+        printf("[Line %d] INTEGER TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_int(yytext));
+    } else if (token_id == T_RCONST) {
+        printf("[Line %d] FLOAT TOKEN \'%s\' (%d). Base 10: %.3f\n", yylineno, yytext, token_id, str_to_float(yytext));
+    } else {
+      printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
+    }
 
-    printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
+    //printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
 }
 
 int str_to_int(char *str) {
@@ -193,8 +194,10 @@ int str_to_int(char *str) {
 float str_to_float(char *str) {
 
      if (strncmp(str, "0B", 2) == 0) { // bin
+        printf("found bin \n");
         return (float) BinToFloat(str);
     } else if (strncmp(str, "0H", 2) == 0) { //hex
+        printf("found Hex \n");
         return (float) HexToFloat(str);
     } else { //dec
         return (float) strtof(str, NULL);
@@ -242,3 +245,7 @@ float HexToFloat(char*str){
 	}
     return number;
 }
+
+
+
+
