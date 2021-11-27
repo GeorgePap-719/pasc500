@@ -7,6 +7,9 @@
 #include <string.h>
 #include <math.h>
 
+char str_buffer[256];
+int error_counter = 0;
+
 void token_print(int token_id);
 int str_to_int(char *str);
 float str_to_float(char *str);
@@ -111,13 +114,35 @@ alphanumu         [a-zA-z0-9_]
 "IN"            { token_print(T_INOP); return T_INOP; }
 
 
-\"              { BEGIN(STRING); }
-<STRING>\"      { BEGIN(INITIAL); }
+\"              { strcpy(str_buffer, ""); BEGIN(STRING); }
+<STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' \n", str_buffer); return T_STRING; }
 <STRING>(\\\n|\\\r\n) {  }
-<STRING>(\\.|[^"\\]) { printf("Found word: %s\n", yytext); }
+<STRING>(\\.|[^"\\]) {
+                        if (strlen(yytext) == 2) {
+                            if (strcmp(yytext, "\\n") == 0) {
+                                strcat(str_buffer, "\n");
+                            } else if (strcmp(yytext, "\\t") == 0) {
+                                strcat(str_buffer, "\t");
+                            } else if (strcmp(yytext, "\\r") == 0) {
+                               strcat(str_buffer, "\r");
+                            } else if (strcmp(yytext, "\\f") == 0) {
+                               strcat(str_buffer, "\f");
+                            } else if (strcmp(yytext, "\\b") == 0) {
+                              strcat(str_buffer, "\b");
+                           } else if (strcmp(yytext, "\\v") == 0) {
+                              strcat(str_buffer, "\v");
+                           }
+                            else {
+                                strcat(str_buffer, &yytext[1]);
+                            }
+                        } else {
+                            strcat(str_buffer, yytext);
+                        }
+
+                         }
 <STRING>(\n|\r\n)   { printf("New line found without \\ \n"); }
-<STRING><<EOF>>     { printf("Unterminated string");      }
-<STRING>.           { printf("Unknown character."); }
+<STRING><<EOF>>     { printf("Unterminated string"); }
+<STRING>.           { printf("Unknown character.");  }
 
 
 
@@ -175,8 +200,6 @@ void token_print(int token_id) {
     } else {
       printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
     }
-
-    //printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
 }
 
 int str_to_int(char *str) {
