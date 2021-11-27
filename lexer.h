@@ -46,7 +46,7 @@
 #define T_INOP  39
 
 
-// comments
+// Strings
 #define T_STRING  40
 
 // Other tokens

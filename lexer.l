@@ -7,7 +7,11 @@
 #include <string.h>
 #include <math.h>
 
+char str_buffer[256];
+int error_counter = 0;
+
 void token_print(int token_id);
+void yyerror(const char* error);
 int str_to_int(char *str);
 float str_to_float(char *str);
 float BinToFloat(char* str);
@@ -28,10 +32,10 @@ ALPHANUM          {LETTER}|{DIGIT}
 NUMBER            [1-9][0-9]*|0
 HEXDIGIT          [0-9A-F]
 
-ID                _?[a-zA-Z]([a-zA-Z0-9]*|[_]*[a-zA-Z0-9]*[a-zA-Z0-9])*
+ID                (_?[a-zA-Z])(([a-zA-Z]|[0-9])*|[_]*([a-zA-Z]|[0-9])*([a-zA-Z]|[0-9]))*
 ICONST            ([1-9][0-9]*|0)([0H][1-9](([0-9]*)|([A-F]+))*)*([0B][1][0-1]*)*
 RCONST            ((([1-9][0-9]*|0)*[.]([1-9][0-9]*|0))(([E][-]?([1-9][0-9]*|0))?|([1-9][0-9]*|0)))|(([1-9][0-9]*([E][-]([0-9])*)))|(([0][B]|[0][H])([0-9A-F]*[.](([1-9][0-9])|[0-9A-F])*|0))
-BCONST            (TRUE)|(FALSE)
+BCONST            (TRUE|FALSE)
 CCONST            \'(([^\\])|(\\[ntfrbv]?))\'
 
 WHITESPACE        [ \t]
@@ -78,17 +82,6 @@ alphanumu         [a-zA-z0-9_]
 "WRITE"         { token_print(T_WRITE); return T_WRITE; }
 
 
-
-
-{ID}            { token_print(T_ID); return T_ID; }
-
-{ICONST}        { token_print(T_ICONST); return T_ICONST; }
-{RCONST}        { token_print(T_RCONST); return T_RCONST; }
-{BCONST}        { token_print(T_BCONST); return T_BCONST; }
-{CCONST}        { token_print(T_CCONST); return T_CCONST; }
-
-
-
 ">"             { token_print(T_RELOP); return T_RELOP; }
 ">="            { token_print(T_RELOP); return T_RELOP; }
 "<"             { token_print(T_RELOP); return T_RELOP; }
@@ -110,14 +103,44 @@ alphanumu         [a-zA-z0-9_]
 
 "IN"            { token_print(T_INOP); return T_INOP; }
 
+{BCONST}        { token_print(T_BCONST); return T_BCONST; }
 
-\"              { BEGIN(STRING); }
-<STRING>\"      { BEGIN(INITIAL); }
+{ID}            { token_print(T_ID); return T_ID; }
+{ICONST}        { token_print(T_ICONST); return T_ICONST; }
+{RCONST}        { token_print(T_RCONST); return T_RCONST; }
+{CCONST}        { token_print(T_CCONST); return T_CCONST; }
+
+
+
+\"              { strcpy(str_buffer, ""); BEGIN(STRING); }
+<STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' \n", str_buffer); return T_STRING; }
 <STRING>(\\\n|\\\r\n) {  }
-<STRING>(\\.|[^"\\]) { printf("Found word: %s\n", yytext); }
-<STRING>(\n|\r\n)   { printf("New line found without \\ \n"); }
-<STRING><<EOF>>     { printf("Unterminated string");      }
-<STRING>.           { printf("Unknown character."); }
+<STRING>(\\.|[^"\\]) {
+                        if (strlen(yytext) == 2) {
+                            if (strcmp(yytext, "\\n") == 0) {
+                                strcat(str_buffer, "\n");
+                            } else if (strcmp(yytext, "\\t") == 0) {
+                                strcat(str_buffer, "\t");
+                            } else if (strcmp(yytext, "\\r") == 0) {
+                               strcat(str_buffer, "\r");
+                            } else if (strcmp(yytext, "\\f") == 0) {
+                               strcat(str_buffer, "\f");
+                            } else if (strcmp(yytext, "\\b") == 0) {
+                              strcat(str_buffer, "\b");
+                           } else if (strcmp(yytext, "\\v") == 0) {
+                              strcat(str_buffer, "\v");
+                           }
+                            else {
+                                strcat(str_buffer, &yytext[1]);
+                            }
+                        } else {
+                            strcat(str_buffer, yytext);
+                        }
+
+                         }
+<STRING>(\n|\r\n)   { yyerror("New line found without \\ \n"); }
+<STRING><<EOF>>     { yyerror("Unterminated string"); }
+<STRING>.           { yyerror("Unknown character.");  }
 
 
 
@@ -142,7 +165,7 @@ alphanumu         [a-zA-z0-9_]
 
 <<EOF>>         { token_print(T_EOF); return T_EOF; }
 
-.               { printf("Unrecognised character at line %d!\n", yylineno); }
+.               { yyerror("Unrecognised character"); }
 
 %%
 
@@ -175,8 +198,6 @@ void token_print(int token_id) {
     } else {
       printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
     }
-
-    //printf("Found token: \'%s\' (%d) at line %d\n", yytext, token_id, yylineno);
 }
 
 int str_to_int(char *str) {
@@ -246,6 +267,9 @@ float HexToFloat(char*str){
     return number;
 }
 
+void yyerror(const char* error) {
+    printf("Found error: %s at line %d\n", error, yylineno);
+}
 
 
 
