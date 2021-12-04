@@ -26,6 +26,8 @@ float HexToFloat(char*str);
 
 %x STRING
 
+%x COMMENT
+
 DIGIT             [0-9]
 LETTER            [a-zA-Z]
 ALPHANUM          {LETTER}|{DIGIT}
@@ -115,7 +117,7 @@ alphanumu         [a-zA-z0-9_]
 \"              { strcpy(str_buffer, ""); BEGIN(STRING); }
 <STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' at line %d\n", str_buffer, yylineno); return T_STRING; }
 <STRING>(\\\n|\\\r\n) {  }
-<STRING>(\n|\r\n)   { yyerror("New line found without \\ \n"); }
+<STRING>(\n|\r\n)   { yyerror("New line found without \\"); }
 <STRING>(\\.|[^"\\]) {
                         if (strlen(yytext) == 2) {
                             if (strcmp(yytext, "\\n") == 0) {
@@ -142,6 +144,9 @@ alphanumu         [a-zA-z0-9_]
 <STRING><<EOF>>     { yyerror("Unterminated string"); }
 <STRING>.           { yyerror("Unknown character.");  }
 
+"{"              { printf("Found comment\n"); BEGIN(COMMENT); }
+<COMMENT>"}"     { BEGIN(INITIAL); printf("Comment ended\n"); }
+<COMMENT>.       {  }
 
 
 
@@ -275,6 +280,7 @@ void yyerror(const char* error) {
         printf("Maximus errors found\n");
         exit(EXIT_FAILURE);
     }
+    yyless(1);
 }
 
 

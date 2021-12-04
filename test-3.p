@@ -1,10 +1,10 @@
  " // yo \"   \
 bill and"
 
-"hey billi this is some trick
+"hey billi this is some trick \
 boy"
 
-"this@#@#@#@#^^ \n &"
+ "this@#@#@#@#^^ \n &"
 
 ""
 
