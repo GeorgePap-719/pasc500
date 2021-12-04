@@ -113,8 +113,9 @@ alphanumu         [a-zA-z0-9_]
 
 
 \"              { strcpy(str_buffer, ""); BEGIN(STRING); }
-<STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' \n", str_buffer); return T_STRING; }
+<STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' at line %d\n", str_buffer, yylineno); return T_STRING; }
 <STRING>(\\\n|\\\r\n) {  }
+<STRING>(\n|\r\n)   { yyerror("New line found without \\ \n"); }
 <STRING>(\\.|[^"\\]) {
                         if (strlen(yytext) == 2) {
                             if (strcmp(yytext, "\\n") == 0) {
@@ -138,7 +139,6 @@ alphanumu         [a-zA-z0-9_]
                         }
 
                          }
-<STRING>(\n|\r\n)   { yyerror("New line found without \\ \n"); }
 <STRING><<EOF>>     { yyerror("Unterminated string"); }
 <STRING>.           { yyerror("Unknown character.");  }
 
@@ -268,7 +268,13 @@ float HexToFloat(char*str){
 }
 
 void yyerror(const char* error) {
-    printf("Found error: %s at line %d\n", error, yylineno);
+    error_counter++;
+    printf("Found error: %s at line %d near: %s\n", error, yylineno, str_buffer);
+
+    if (error_counter == 5){
+        printf("Maximus errors found\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 
