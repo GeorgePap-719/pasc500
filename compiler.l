@@ -1,5 +1,6 @@
 %{
-#include "lexer.h"
+
+#include "syntax.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -173,27 +174,6 @@ alphanumu         [a-zA-z0-9_]
 .               { yyerror("Unrecognised character"); }
 
 %%
-
-int main(int argc, char* argv[]) {
- int token;
-
-    if(argc > 1){
-        yyin = fopen(argv[1], "r");
-        if (yyin == NULL){
-            perror ("Error opening file"); return -1;
-        }
-    }
-
-    do{
-		token = yylex();
-    }while(token != T_EOF);
-
-
-    printf("Program analyzed successfully\n");
-
-    fclose(yyin);
-    yyterminate();
-}
 
 void token_print(int token_id) {
     if (token_id == T_ICONST) {

@@ -9,4 +9,6 @@ float a = 180Ε-2
 float b = .5
 float c = 0HA.9
 
+int x = 10;
+
 
