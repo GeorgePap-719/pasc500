@@ -3,18 +3,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-
 extern FILE *yyin;
 extern int yylex();
 extern void yyerror(const char* error);
 
 %}
 
+%define parse.error verbose
+
 %union{
     int intval;
     float floatval;
-    bool boolean;
+    int boolean;
     char charval;
 }
 
@@ -240,7 +240,6 @@ write_item: expression
         | T_STRING
 
 %%
-
 
 int main(int argc, char* argv[]) {
  int token;

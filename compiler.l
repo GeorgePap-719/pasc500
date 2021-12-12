@@ -1,5 +1,4 @@
 %{
-
 #include "syntax.tab.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,6 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#define FLEX_DEBUG 0
 
 char str_buffer[256];
 int error_counter = 0;
@@ -116,9 +116,10 @@ alphanumu         [a-zA-z0-9_]
 
 
 \"              { strcpy(str_buffer, ""); BEGIN(STRING); }
-<STRING>\"      { BEGIN(INITIAL); printf("Found string: '%s' at line %d\n", str_buffer, yylineno); return T_STRING; }
+<STRING>\"      { BEGIN(INITIAL); if (FLEX_DEBUG == 1) { printf("Found string: '%s' at line %d\n", str_buffer, yylineno); }
+                  return T_STRING;
+                     }
 <STRING>(\\\n|\\\r\n) {  }
-<STRING>(\n|\r\n)   { yyerror("New line found without \\"); }
 <STRING>(\\.|[^"\\]) {
                         if (strlen(yytext) == 2) {
                             if (strcmp(yytext, "\\n") == 0) {
@@ -142,11 +143,13 @@ alphanumu         [a-zA-z0-9_]
                         }
 
                          }
+
+<STRING>(\n|\r\n)   { yyerror("New line found without \\"); }
 <STRING><<EOF>>     { yyerror("Unterminated string"); }
 <STRING>.           { yyerror("Unknown character.");  }
 
-"{"              { printf("Found comment\n"); BEGIN(COMMENT); }
-<COMMENT>"}"     { BEGIN(INITIAL); printf("Comment ended\n"); }
+"{"              { BEGIN(COMMENT); }
+<COMMENT>"}"     { BEGIN(INITIAL); }
 <COMMENT>.       {  }
 
 
@@ -176,6 +179,11 @@ alphanumu         [a-zA-z0-9_]
 %%
 
 void token_print(int token_id) {
+
+    if (FLEX_DEBUG == 0) {
+        return;
+    }
+
     if (token_id == T_ICONST) {
         printf("[Line %d] INTEGER TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_int(yytext));
     } else if (token_id == T_RCONST) {

@@ -113,11 +113,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "syntax.y"
+#line 14 "syntax.y"
 
     int intval;
     float floatval;
-    bool boolean;
+    int boolean;
     char charval;
 
 #line 124 "syntax.tab.h"
