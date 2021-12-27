@@ -1,6 +1,3 @@
-State 180 conflicts: 1 shift/reduce
-
-
 Grammar
 
     0 $accept: program "EOF"
@@ -223,151 +220,152 @@ Terminals, with rules where they appear
     "]" (306) 23 30 31 40
     ":=" (307) 95 96 101
     ".." (308) 34 44 47
+    LOWER_THAN_ELSE (309)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (54)
+    $accept (55)
         on left: 0
-    program (55)
+    program (56)
         on left: 1
         on right: 0
-    header (56)
+    header (57)
         on left: 2
         on right: 1
-    declarations (57)
+    declarations (58)
         on left: 3
         on right: 1 73
-    constdefs (58)
+    constdefs (59)
         on left: 4 5
         on right: 3
-    constant_defs (59)
+    constant_defs (60)
         on left: 6 7
         on right: 4 6
-    expression (60)
+    expression (61)
         on left: 8 9 10 11 12 13 14 15 16 17 18 19 20
         on right: 6 7 8 9 10 11 12 13 14 15 19 24 25 34 35 95 97 100 102 103 114
-    variable (61)
+    variable (62)
         on left: 21 22 23
         on right: 16 22 23 95 96 104 111
-    expressions (62)
+    expressions (63)
         on left: 24 25
         on right: 17 23 24 106
-    constant (63)
+    constant (64)
         on left: 26 27 28 29
         on right: 18
-    setexpression (64)
+    setexpression (65)
         on left: 30 31
         on right: 20
-    elexpressions (65)
+    elexpressions (66)
         on left: 32 33
         on right: 30 32
-    elexpression (66)
+    elexpression (67)
         on left: 34 35
         on right: 32 33
-    typedefs (67)
+    typedefs (68)
         on left: 36 37
         on right: 3
-    type_defs (68)
+    type_defs (69)
         on left: 38 39
         on right: 36 38
-    type_def (69)
+    type_def (70)
         on left: 40 41 42 43 44
         on right: 38 39
-    dims (70)
+    dims (71)
         on left: 45 46
         on right: 40 45
-    limits (71)
+    limits (72)
         on left: 47 48
         on right: 45 46
-    limit (72)
+    limit (73)
         on left: 49 50 51 52 53 54
         on right: 44 47
-    typename (73)
+    typename (74)
         on left: 55 56
         on right: 40 41 63 68 69 79 80
-    standard_type (74)
+    standard_type (75)
         on left: 57 58 59 60
         on right: 55 74
-    fields (75)
+    fields (76)
         on left: 61 62
         on right: 42 61
-    field (76)
+    field (77)
         on left: 63
         on right: 61 62
-    identifiers (77)
+    identifiers (78)
         on left: 64 65
         on right: 43 63 64 68 69 79 80
-    vardefs (78)
+    vardefs (79)
         on left: 66 67
         on right: 3
-    variable_defs (79)
+    variable_defs (80)
         on left: 68 69
         on right: 66 68
-    subprograms (80)
+    subprograms (81)
         on left: 70 71
         on right: 1 70 73
-    subprogram (81)
+    subprogram (82)
         on left: 72 73
         on right: 70
-    sub_header (82)
+    sub_header (83)
         on left: 74 75 76
         on right: 72 73
-    formal_parameters (83)
+    formal_parameters (84)
         on left: 77 78
         on right: 74 75
-    parameter_list (84)
+    parameter_list (85)
         on left: 79 80
         on right: 77 79
-    pass (85)
+    pass (86)
         on left: 81 82
         on right: 79 80
-    comp_statement (86)
+    comp_statement (87)
         on left: 83
         on right: 1 73 93
-    statements (87)
+    statements (88)
         on left: 84 85
         on right: 83 84
-    statement (88)
+    statement (89)
         on left: 86 87 88 89 90 91 92 93 94
         on right: 84 85 97 98 100 101 104
-    assignment (89)
+    assignment (90)
         on left: 95 96
         on right: 86
-    if_statement (90)
+    if_statement (91)
         on left: 97
         on right: 87
-    if_tail (91)
+    if_tail (92)
         on left: 98 99
         on right: 97
-    while_statement (92)
+    while_statement (93)
         on left: 100
         on right: 88
-    for_statement (93)
+    for_statement (94)
         on left: 101
         on right: 89
-    iter_space (94)
+    iter_space (95)
         on left: 102 103
         on right: 101
-    with_statement (95)
+    with_statement (96)
         on left: 104
         on right: 90
-    subprogram_call (96)
+    subprogram_call (97)
         on left: 105 106
         on right: 91
-    io_statement (97)
+    io_statement (98)
         on left: 107 108
         on right: 92
-    read_list (98)
+    read_list (99)
         on left: 109 110
         on right: 107 109
-    read_item (99)
+    read_item (100)
         on left: 111
         on right: 109 110
-    write_list (100)
+    write_list (101)
         on left: 112 113
         on right: 108 112
-    write_item (101)
+    write_item (102)
         on left: 114 115
         on right: 112 113
 
@@ -2458,7 +2456,6 @@ State 180
 
     "else"  shift, and go to state 206
 
-    "else"    [reduce using rule 99 (if_tail)]
     $default  reduce using rule 99 (if_tail)
 
     if_tail  go to state 207

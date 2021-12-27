@@ -79,12 +79,17 @@ extern void yyerror(const char* error);
 
 %token T_EOF  0     "EOF"
 
+%type <strval> program header declarations constdefs constant_defs expression variable expressions constant setexpression elexpressions elexpression typedefs type_defs type_def dims limits limit typename standard_type fields field identifiers vardefs variable_defs subprograms subprogram sub_header formal_parameters parameter_list pass comp_statement statements statement assignment if_statement if_tail while_statement for_statement iter_space with_statement subprogram_call io_statement read_list read_item write_list write_item
+
 %left T_INOP T_RELOP T_EQU
 %left T_OROP T_ADDOP
 %left T_MULDIVANDOP
 %left T_NOTOP
 
+%nonassoc LOWER_THAN_ELSE
+%nonassoc T_ELSE
 
+%start program
 
 %%
 
@@ -219,7 +224,7 @@ assignment: variable T_ASSIGN expression
 if_statement: T_IF expression T_THEN statement if_tail
 
 if_tail: T_ELSE statement
-        | %empty
+        | %empty %prec LOWER_THAN_ELSE
 
 while_statement: T_WHILE expression T_DO statement
 

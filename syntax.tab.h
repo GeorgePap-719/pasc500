@@ -104,7 +104,8 @@ extern int yydebug;
     T_LBRACK = 305,                /* "["  */
     T_RBRACK = 306,                /* "]"  */
     T_ASSIGN = 307,                /* ":="  */
-    T_DOTDOT = 308                 /* ".."  */
+    T_DOTDOT = 308,                /* ".."  */
+    LOWER_THAN_ELSE = 309          /* LOWER_THAN_ELSE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -121,7 +122,7 @@ union YYSTYPE
     char charval;
     char* strval;
 
-#line 125 "syntax.tab.h"
+#line 126 "syntax.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

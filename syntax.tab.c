@@ -160,54 +160,55 @@ enum yysymbol_kind_t
   YYSYMBOL_T_RBRACK = 51,                  /* "]"  */
   YYSYMBOL_T_ASSIGN = 52,                  /* ":="  */
   YYSYMBOL_T_DOTDOT = 53,                  /* ".."  */
-  YYSYMBOL_YYACCEPT = 54,                  /* $accept  */
-  YYSYMBOL_program = 55,                   /* program  */
-  YYSYMBOL_header = 56,                    /* header  */
-  YYSYMBOL_declarations = 57,              /* declarations  */
-  YYSYMBOL_constdefs = 58,                 /* constdefs  */
-  YYSYMBOL_constant_defs = 59,             /* constant_defs  */
-  YYSYMBOL_expression = 60,                /* expression  */
-  YYSYMBOL_variable = 61,                  /* variable  */
-  YYSYMBOL_expressions = 62,               /* expressions  */
-  YYSYMBOL_constant = 63,                  /* constant  */
-  YYSYMBOL_setexpression = 64,             /* setexpression  */
-  YYSYMBOL_elexpressions = 65,             /* elexpressions  */
-  YYSYMBOL_elexpression = 66,              /* elexpression  */
-  YYSYMBOL_typedefs = 67,                  /* typedefs  */
-  YYSYMBOL_type_defs = 68,                 /* type_defs  */
-  YYSYMBOL_type_def = 69,                  /* type_def  */
-  YYSYMBOL_dims = 70,                      /* dims  */
-  YYSYMBOL_limits = 71,                    /* limits  */
-  YYSYMBOL_limit = 72,                     /* limit  */
-  YYSYMBOL_typename = 73,                  /* typename  */
-  YYSYMBOL_standard_type = 74,             /* standard_type  */
-  YYSYMBOL_fields = 75,                    /* fields  */
-  YYSYMBOL_field = 76,                     /* field  */
-  YYSYMBOL_identifiers = 77,               /* identifiers  */
-  YYSYMBOL_vardefs = 78,                   /* vardefs  */
-  YYSYMBOL_variable_defs = 79,             /* variable_defs  */
-  YYSYMBOL_subprograms = 80,               /* subprograms  */
-  YYSYMBOL_subprogram = 81,                /* subprogram  */
-  YYSYMBOL_sub_header = 82,                /* sub_header  */
-  YYSYMBOL_formal_parameters = 83,         /* formal_parameters  */
-  YYSYMBOL_parameter_list = 84,            /* parameter_list  */
-  YYSYMBOL_pass = 85,                      /* pass  */
-  YYSYMBOL_comp_statement = 86,            /* comp_statement  */
-  YYSYMBOL_statements = 87,                /* statements  */
-  YYSYMBOL_statement = 88,                 /* statement  */
-  YYSYMBOL_assignment = 89,                /* assignment  */
-  YYSYMBOL_if_statement = 90,              /* if_statement  */
-  YYSYMBOL_if_tail = 91,                   /* if_tail  */
-  YYSYMBOL_while_statement = 92,           /* while_statement  */
-  YYSYMBOL_for_statement = 93,             /* for_statement  */
-  YYSYMBOL_iter_space = 94,                /* iter_space  */
-  YYSYMBOL_with_statement = 95,            /* with_statement  */
-  YYSYMBOL_subprogram_call = 96,           /* subprogram_call  */
-  YYSYMBOL_io_statement = 97,              /* io_statement  */
-  YYSYMBOL_read_list = 98,                 /* read_list  */
-  YYSYMBOL_read_item = 99,                 /* read_item  */
-  YYSYMBOL_write_list = 100,               /* write_list  */
-  YYSYMBOL_write_item = 101                /* write_item  */
+  YYSYMBOL_LOWER_THAN_ELSE = 54,           /* LOWER_THAN_ELSE  */
+  YYSYMBOL_YYACCEPT = 55,                  /* $accept  */
+  YYSYMBOL_program = 56,                   /* program  */
+  YYSYMBOL_header = 57,                    /* header  */
+  YYSYMBOL_declarations = 58,              /* declarations  */
+  YYSYMBOL_constdefs = 59,                 /* constdefs  */
+  YYSYMBOL_constant_defs = 60,             /* constant_defs  */
+  YYSYMBOL_expression = 61,                /* expression  */
+  YYSYMBOL_variable = 62,                  /* variable  */
+  YYSYMBOL_expressions = 63,               /* expressions  */
+  YYSYMBOL_constant = 64,                  /* constant  */
+  YYSYMBOL_setexpression = 65,             /* setexpression  */
+  YYSYMBOL_elexpressions = 66,             /* elexpressions  */
+  YYSYMBOL_elexpression = 67,              /* elexpression  */
+  YYSYMBOL_typedefs = 68,                  /* typedefs  */
+  YYSYMBOL_type_defs = 69,                 /* type_defs  */
+  YYSYMBOL_type_def = 70,                  /* type_def  */
+  YYSYMBOL_dims = 71,                      /* dims  */
+  YYSYMBOL_limits = 72,                    /* limits  */
+  YYSYMBOL_limit = 73,                     /* limit  */
+  YYSYMBOL_typename = 74,                  /* typename  */
+  YYSYMBOL_standard_type = 75,             /* standard_type  */
+  YYSYMBOL_fields = 76,                    /* fields  */
+  YYSYMBOL_field = 77,                     /* field  */
+  YYSYMBOL_identifiers = 78,               /* identifiers  */
+  YYSYMBOL_vardefs = 79,                   /* vardefs  */
+  YYSYMBOL_variable_defs = 80,             /* variable_defs  */
+  YYSYMBOL_subprograms = 81,               /* subprograms  */
+  YYSYMBOL_subprogram = 82,                /* subprogram  */
+  YYSYMBOL_sub_header = 83,                /* sub_header  */
+  YYSYMBOL_formal_parameters = 84,         /* formal_parameters  */
+  YYSYMBOL_parameter_list = 85,            /* parameter_list  */
+  YYSYMBOL_pass = 86,                      /* pass  */
+  YYSYMBOL_comp_statement = 87,            /* comp_statement  */
+  YYSYMBOL_statements = 88,                /* statements  */
+  YYSYMBOL_statement = 89,                 /* statement  */
+  YYSYMBOL_assignment = 90,                /* assignment  */
+  YYSYMBOL_if_statement = 91,              /* if_statement  */
+  YYSYMBOL_if_tail = 92,                   /* if_tail  */
+  YYSYMBOL_while_statement = 93,           /* while_statement  */
+  YYSYMBOL_for_statement = 94,             /* for_statement  */
+  YYSYMBOL_iter_space = 95,                /* iter_space  */
+  YYSYMBOL_with_statement = 96,            /* with_statement  */
+  YYSYMBOL_subprogram_call = 97,           /* subprogram_call  */
+  YYSYMBOL_io_statement = 98,              /* io_statement  */
+  YYSYMBOL_read_list = 99,                 /* read_list  */
+  YYSYMBOL_read_item = 100,                /* read_item  */
+  YYSYMBOL_write_list = 101,               /* write_list  */
+  YYSYMBOL_write_item = 102                /* write_item  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -520,7 +521,7 @@ union yyalloc
 #define YYLAST   285
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  54
+#define YYNTOKENS  55
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  48
 /* YYNRULES -- Number of rules.  */
@@ -529,7 +530,7 @@ union yyalloc
 #define YYNSTATES  231
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   308
+#define YYMAXUTOK   309
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -573,25 +574,25 @@ static const yytype_int8 yytranslate[] =
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,    51,    52,    53
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    92,    92,    94,    96,    98,    99,   101,   102,   104,
-     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
-     115,   116,   118,   119,   120,   122,   123,   125,   126,   127,
-     128,   130,   131,   133,   134,   136,   137,   139,   140,   142,
-     143,   145,   146,   147,   148,   149,   151,   152,   154,   155,
-     157,   158,   159,   160,   161,   162,   164,   165,   167,   167,
-     167,   167,   169,   170,   172,   174,   175,   177,   178,   180,
-     181,   183,   184,   186,   187,   189,   190,   191,   193,   194,
-     196,   197,   199,   199,   201,   203,   204,   206,   207,   208,
-     209,   210,   211,   212,   213,   214,   216,   217,   219,   221,
-     222,   224,   226,   228,   229,   231,   233,   234,   236,   237,
-     239,   240,   242,   244,   245,   247,   248
+       0,    95,    95,    97,    99,   101,   102,   104,   105,   107,
+     108,   109,   110,   111,   112,   113,   114,   115,   116,   117,
+     118,   119,   121,   122,   123,   125,   126,   128,   129,   130,
+     131,   133,   134,   136,   137,   139,   140,   142,   143,   145,
+     146,   148,   149,   150,   151,   152,   154,   155,   157,   158,
+     160,   161,   162,   163,   164,   165,   167,   168,   170,   170,
+     170,   170,   172,   173,   175,   177,   178,   180,   181,   183,
+     184,   186,   187,   189,   190,   192,   193,   194,   196,   197,
+     199,   200,   202,   202,   204,   206,   207,   209,   210,   211,
+     212,   213,   214,   215,   216,   217,   219,   220,   222,   224,
+     225,   227,   229,   231,   232,   234,   236,   237,   239,   240,
+     242,   243,   245,   247,   248,   250,   251
 };
 #endif
 
@@ -616,17 +617,18 @@ static const char *const yytname[] =
   "\"rconst\"", "\"bconst\"", "\"cconst\"", "\"> or >= or < or <= or <>\"",
   "\"+ or -\"", "\"or\"", "\"* or / or div or mod or and\"", "\"not\"",
   "\"in\"", "\"string\"", "\"(\"", "\")\"", "\";\"", "\".\"", "\",\"",
-  "\"=\"", "\":\"", "\"[\"", "\"]\"", "\":=\"", "\"..\"", "$accept",
-  "program", "header", "declarations", "constdefs", "constant_defs",
-  "expression", "variable", "expressions", "constant", "setexpression",
-  "elexpressions", "elexpression", "typedefs", "type_defs", "type_def",
-  "dims", "limits", "limit", "typename", "standard_type", "fields",
-  "field", "identifiers", "vardefs", "variable_defs", "subprograms",
-  "subprogram", "sub_header", "formal_parameters", "parameter_list",
-  "pass", "comp_statement", "statements", "statement", "assignment",
-  "if_statement", "if_tail", "while_statement", "for_statement",
-  "iter_space", "with_statement", "subprogram_call", "io_statement",
-  "read_list", "read_item", "write_list", "write_item", YY_NULLPTR
+  "\"=\"", "\":\"", "\"[\"", "\"]\"", "\":=\"", "\"..\"",
+  "LOWER_THAN_ELSE", "$accept", "program", "header", "declarations",
+  "constdefs", "constant_defs", "expression", "variable", "expressions",
+  "constant", "setexpression", "elexpressions", "elexpression", "typedefs",
+  "type_defs", "type_def", "dims", "limits", "limit", "typename",
+  "standard_type", "fields", "field", "identifiers", "vardefs",
+  "variable_defs", "subprograms", "subprogram", "sub_header",
+  "formal_parameters", "parameter_list", "pass", "comp_statement",
+  "statements", "statement", "assignment", "if_statement", "if_tail",
+  "while_statement", "for_statement", "iter_space", "with_statement",
+  "subprogram_call", "io_statement", "read_list", "read_item",
+  "write_list", "write_item", YY_NULLPTR
 };
 
 static const char *
@@ -646,7 +648,7 @@ static const yytype_int16 yytoknum[] =
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
      285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
      295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
-     305,   306,   307,   308
+     305,   306,   307,   308,   309
 };
 #endif
 
@@ -814,47 +816,47 @@ static const yytype_uint8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    55,    56,    31,     0,     4,    57,    58,    45,
-      31,    59,    80,     5,    67,    48,    45,    12,    13,    18,
-      81,    82,    86,    31,    68,    10,    78,    31,    32,    33,
-      34,    35,    37,    40,    43,    50,    60,    61,    63,    64,
+       0,     3,    56,    57,    31,     0,     4,    58,    59,    45,
+      31,    60,    81,     5,    68,    48,    45,    12,    13,    18,
+      82,    83,    87,    31,    69,    10,    79,    31,    32,    33,
+      34,    35,    37,    40,    43,    50,    61,    62,    64,    65,
       31,    31,    31,    20,    23,    25,    28,    29,    30,    31,
-      61,    86,    87,    88,    89,    90,    92,    93,    95,    96,
-      97,    45,    45,    46,    48,    45,    31,    77,    79,    43,
-      60,    60,    60,    51,    60,    65,    66,    36,    37,    38,
-      39,    41,    48,    46,    50,    48,    43,    83,    83,    60,
-      60,    31,    31,    61,    43,    43,    43,    52,    19,    45,
-      11,    57,     6,     7,     9,    31,    32,    34,    35,    37,
-      43,    69,    72,    31,    47,    49,    45,    60,    62,    44,
-      53,    47,    51,    60,    60,    60,    60,    60,    60,    31,
-      62,    60,    10,    84,    85,    49,    21,    24,    52,    24,
-      61,    98,    99,    42,    60,   100,   101,    62,    42,    60,
-      88,    80,    50,     8,    75,    76,    77,    31,    32,    77,
-      53,    48,    31,    14,    15,    16,    17,    31,    73,    74,
-      77,    44,    47,    60,    66,    51,    44,    45,    77,    74,
-      88,    88,    60,    94,    88,    44,    47,    44,    47,    44,
-      86,    31,    70,    71,    72,    73,    19,    45,    49,    44,
-      72,    69,    49,    60,    85,    49,    22,    91,    26,    27,
-      24,    99,   101,    47,    51,    53,    76,    73,    73,    77,
-      73,    88,    60,    60,    88,    71,     8,    72,    49,    73,
-      73
+      62,    87,    88,    89,    90,    91,    93,    94,    96,    97,
+      98,    45,    45,    46,    48,    45,    31,    78,    80,    43,
+      61,    61,    61,    51,    61,    66,    67,    36,    37,    38,
+      39,    41,    48,    46,    50,    48,    43,    84,    84,    61,
+      61,    31,    31,    62,    43,    43,    43,    52,    19,    45,
+      11,    58,     6,     7,     9,    31,    32,    34,    35,    37,
+      43,    70,    73,    31,    47,    49,    45,    61,    63,    44,
+      53,    47,    51,    61,    61,    61,    61,    61,    61,    31,
+      63,    61,    10,    85,    86,    49,    21,    24,    52,    24,
+      62,    99,   100,    42,    61,   101,   102,    63,    42,    61,
+      89,    81,    50,     8,    76,    77,    78,    31,    32,    78,
+      53,    48,    31,    14,    15,    16,    17,    31,    74,    75,
+      78,    44,    47,    61,    67,    51,    44,    45,    78,    75,
+      89,    89,    61,    95,    89,    44,    47,    44,    47,    44,
+      87,    31,    71,    72,    73,    74,    19,    45,    49,    44,
+      73,    70,    49,    61,    86,    49,    22,    92,    26,    27,
+      24,   100,   102,    47,    51,    53,    77,    74,    74,    78,
+      74,    89,    61,    61,    89,    72,     8,    73,    49,    74,
+      74
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    54,    55,    56,    57,    58,    58,    59,    59,    60,
-      60,    60,    60,    60,    60,    60,    60,    60,    60,    60,
-      60,    60,    61,    61,    61,    62,    62,    63,    63,    63,
-      63,    64,    64,    65,    65,    66,    66,    67,    67,    68,
-      68,    69,    69,    69,    69,    69,    70,    70,    71,    71,
-      72,    72,    72,    72,    72,    72,    73,    73,    74,    74,
-      74,    74,    75,    75,    76,    77,    77,    78,    78,    79,
-      79,    80,    80,    81,    81,    82,    82,    82,    83,    83,
-      84,    84,    85,    85,    86,    87,    87,    88,    88,    88,
-      88,    88,    88,    88,    88,    88,    89,    89,    90,    91,
-      91,    92,    93,    94,    94,    95,    96,    96,    97,    97,
-      98,    98,    99,   100,   100,   101,   101
+       0,    55,    56,    57,    58,    59,    59,    60,    60,    61,
+      61,    61,    61,    61,    61,    61,    61,    61,    61,    61,
+      61,    61,    62,    62,    62,    63,    63,    64,    64,    64,
+      64,    65,    65,    66,    66,    67,    67,    68,    68,    69,
+      69,    70,    70,    70,    70,    70,    71,    71,    72,    72,
+      73,    73,    73,    73,    73,    73,    74,    74,    75,    75,
+      75,    75,    76,    76,    77,    78,    78,    79,    79,    80,
+      80,    81,    81,    82,    82,    83,    83,    83,    84,    84,
+      85,    85,    86,    86,    87,    88,    88,    89,    89,    89,
+      89,    89,    89,    89,    89,    89,    90,    90,    91,    92,
+      92,    93,    94,    95,    95,    96,    97,    97,    98,    98,
+      99,    99,   100,   101,   101,   102,   102
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1609,7 +1611,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1613 "syntax.tab.c"
+#line 1615 "syntax.tab.c"
 
       default: break;
     }
@@ -1834,7 +1836,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 250 "syntax.y"
+#line 253 "syntax.y"
 
 
 int main(int argc, char* argv[]) {
