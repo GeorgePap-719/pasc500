@@ -1,11 +1,3 @@
-State 70 conflicts: 6 shift/reduce
-State 71 conflicts: 6 shift/reduce
-State 123 conflicts: 6 shift/reduce
-State 124 conflicts: 6 shift/reduce
-State 125 conflicts: 6 shift/reduce
-State 126 conflicts: 6 shift/reduce
-State 127 conflicts: 6 shift/reduce
-State 128 conflicts: 6 shift/reduce
 State 180 conflicts: 1 shift/reduce
 
 
@@ -1120,20 +1112,9 @@ State 70
    13           | expression • "* or / or div or mod or and" expression
    14           | "+ or -" expression •
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
-    "+ or -"                       shift, and go to state 78
-    "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 14 (expression)]
-    "+ or -"                       [reduce using rule 14 (expression)]
-    "or"                           [reduce using rule 14 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 14 (expression)]
-    "in"                           [reduce using rule 14 (expression)]
-    "="                            [reduce using rule 14 (expression)]
-    $default                       reduce using rule 14 (expression)
+    $default  reduce using rule 14 (expression)
 
 
 State 71
@@ -1146,20 +1127,7 @@ State 71
    13           | expression • "* or / or div or mod or and" expression
    15           | "not" expression •
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
-    "+ or -"                       shift, and go to state 78
-    "or"                           shift, and go to state 79
-    "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
-
-    "> or >= or < or <= or <>"     [reduce using rule 15 (expression)]
-    "+ or -"                       [reduce using rule 15 (expression)]
-    "or"                           [reduce using rule 15 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 15 (expression)]
-    "in"                           [reduce using rule 15 (expression)]
-    "="                            [reduce using rule 15 (expression)]
-    $default                       reduce using rule 15 (expression)
+    $default  reduce using rule 15 (expression)
 
 
 State 72
@@ -1829,20 +1797,11 @@ State 123
    12           | expression • "+ or -" expression
    13           | expression • "* or / or div or mod or and" expression
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
     "+ or -"                       shift, and go to state 78
     "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 8 (expression)]
-    "+ or -"                       [reduce using rule 8 (expression)]
-    "or"                           [reduce using rule 8 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 8 (expression)]
-    "in"                           [reduce using rule 8 (expression)]
-    "="                            [reduce using rule 8 (expression)]
-    $default                       reduce using rule 8 (expression)
+    $default  reduce using rule 8 (expression)
 
 
 State 124
@@ -1855,20 +1814,9 @@ State 124
    12           | expression "+ or -" expression •
    13           | expression • "* or / or div or mod or and" expression
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
-    "+ or -"                       shift, and go to state 78
-    "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 12 (expression)]
-    "+ or -"                       [reduce using rule 12 (expression)]
-    "or"                           [reduce using rule 12 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 12 (expression)]
-    "in"                           [reduce using rule 12 (expression)]
-    "="                            [reduce using rule 12 (expression)]
-    $default                       reduce using rule 12 (expression)
+    $default  reduce using rule 12 (expression)
 
 
 State 125
@@ -1881,20 +1829,9 @@ State 125
    12           | expression • "+ or -" expression
    13           | expression • "* or / or div or mod or and" expression
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
-    "+ or -"                       shift, and go to state 78
-    "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 11 (expression)]
-    "+ or -"                       [reduce using rule 11 (expression)]
-    "or"                           [reduce using rule 11 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 11 (expression)]
-    "in"                           [reduce using rule 11 (expression)]
-    "="                            [reduce using rule 11 (expression)]
-    $default                       reduce using rule 11 (expression)
+    $default  reduce using rule 11 (expression)
 
 
 State 126
@@ -1907,20 +1844,7 @@ State 126
    13           | expression • "* or / or div or mod or and" expression
    13           | expression "* or / or div or mod or and" expression •
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
-    "+ or -"                       shift, and go to state 78
-    "or"                           shift, and go to state 79
-    "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
-
-    "> or >= or < or <= or <>"     [reduce using rule 13 (expression)]
-    "+ or -"                       [reduce using rule 13 (expression)]
-    "or"                           [reduce using rule 13 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 13 (expression)]
-    "in"                           [reduce using rule 13 (expression)]
-    "="                            [reduce using rule 13 (expression)]
-    $default                       reduce using rule 13 (expression)
+    $default  reduce using rule 13 (expression)
 
 
 State 127
@@ -1933,20 +1857,11 @@ State 127
    12           | expression • "+ or -" expression
    13           | expression • "* or / or div or mod or and" expression
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
     "+ or -"                       shift, and go to state 78
     "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 10 (expression)]
-    "+ or -"                       [reduce using rule 10 (expression)]
-    "or"                           [reduce using rule 10 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 10 (expression)]
-    "in"                           [reduce using rule 10 (expression)]
-    "="                            [reduce using rule 10 (expression)]
-    $default                       reduce using rule 10 (expression)
+    $default  reduce using rule 10 (expression)
 
 
 State 128
@@ -1959,20 +1874,11 @@ State 128
    12           | expression • "+ or -" expression
    13           | expression • "* or / or div or mod or and" expression
 
-    "> or >= or < or <= or <>"     shift, and go to state 77
     "+ or -"                       shift, and go to state 78
     "or"                           shift, and go to state 79
     "* or / or div or mod or and"  shift, and go to state 80
-    "in"                           shift, and go to state 81
-    "="                            shift, and go to state 82
 
-    "> or >= or < or <= or <>"     [reduce using rule 9 (expression)]
-    "+ or -"                       [reduce using rule 9 (expression)]
-    "or"                           [reduce using rule 9 (expression)]
-    "* or / or div or mod or and"  [reduce using rule 9 (expression)]
-    "in"                           [reduce using rule 9 (expression)]
-    "="                            [reduce using rule 9 (expression)]
-    $default                       reduce using rule 9 (expression)
+    $default  reduce using rule 9 (expression)
 
 
 State 129

@@ -79,6 +79,13 @@ extern void yyerror(const char* error);
 
 %token T_EOF  0     "EOF"
 
+%left T_INOP T_RELOP T_EQU
+%left T_OROP T_ADDOP
+%left T_MULDIVANDOP
+%left T_NOTOP
+
+
+
 %%
 
 
