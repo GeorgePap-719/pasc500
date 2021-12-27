@@ -208,7 +208,7 @@ Terminals, with rules where they appear
     "with" (283) 104
     "read" (284) 107
     "write" (285) 108
-    "id" (286) 2 6 7 17 21 22 38 39 48 50 54 56 64 65 74 75 76 101 105 106
+    "id" <strval> (286) 2 6 7 17 21 22 38 39 48 50 54 56 64 65 74 75 76 101 105 106
     "iconst" <intval> (287) 26 49 51
     "rconst" <floatval> (288) 27
     "bconst" <boolean> (289) 28 53

@@ -119,8 +119,9 @@ union YYSTYPE
     float floatval;
     int boolean;
     char charval;
+    char* strval;
 
-#line 124 "syntax.tab.h"
+#line 125 "syntax.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

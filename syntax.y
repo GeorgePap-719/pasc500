@@ -16,6 +16,7 @@ extern void yyerror(const char* error);
     float floatval;
     int boolean;
     char charval;
+    char* strval;
 }
 
 %token T_PROGRAM        "program"
@@ -47,7 +48,7 @@ extern void yyerror(const char* error);
 %token T_READ           "read"
 %token T_WRITE          "write"
 
-%token T_ID             "id"
+%token <strval> T_ID             "id"
 
 %token <intval> T_ICONST        "iconst"
 %token <floatval> T_RCONST      "rconst"

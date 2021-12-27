@@ -18,6 +18,8 @@ float str_to_float(char *str);
 float BinToFloat(char* str);
 float OctToFloat(char* str);
 float HexToFloat(char*str);
+int str_to_boolean(char *str);
+char* str_to_const(char *str);
 
 %}
 
@@ -106,17 +108,17 @@ alphanumu         [a-zA-z0-9_]
 
 "IN"            { token_print(T_INOP); return T_INOP; }
 
-{BCONST}        { token_print(T_BCONST); return T_BCONST; }
-
-{ID}            { token_print(T_ID); return T_ID; }
-{ICONST}        { token_print(T_ICONST); return T_ICONST; }
-{RCONST}        { token_print(T_RCONST); return T_RCONST; }
-{CCONST}        { token_print(T_CCONST); return T_CCONST; }
+{BCONST}        { token_print(T_BCONST); yylval.boolean = str_to_boolean(yytext); return T_BCONST; }
+{ID}            { token_print(T_ID); yylval.strval = strdup(yytext); return T_ID; }
+{ICONST}        { token_print(T_ICONST); yylval.intval = str_to_int(yytext); return T_ICONST; }
+{RCONST}        { token_print(T_RCONST); yylval.floatval = str_to_float(yytext); return T_RCONST; }
+{CCONST}        { token_print(T_CCONST); yylval.strval = str_to_const(yytext); return T_CCONST; }
 
 
 
 \"              { strcpy(str_buffer, ""); BEGIN(STRING); }
 <STRING>\"      { BEGIN(INITIAL); if (FLEX_DEBUG == 1) { printf("Found string: '%s' at line %d\n", str_buffer, yylineno); }
+                  yylval.strval = strdup(str_buffer);
                   return T_STRING;
                      }
 <STRING>(\\\n|\\\r\n) {  }
@@ -271,5 +273,30 @@ void yyerror(const char* error) {
     yyless(1);
 }
 
+int str_to_boolean(char *str) {
+    if (strcmp(str, "true") == 0) return 0;
+        else return 1;
+}
+
+char* str_to_const(char *str) {
+    int length_const = strlen(str);
+    if (strlen(str) != 2) {
+       if (strcmp(str, "\\n") == 0) {
+           return "\n";
+       } else if (strcmp(str, "\\t") == 0) {
+           return "\t";
+       } else if (strcmp(str, "\\r") == 0) {
+            return "\r";
+       } else if (strcmp(str, "\\f") == 0) {
+            return "\f";
+       } else if (strcmp(str, "\\b") == 0) {
+            return "\b";
+       } else if (strcmp(str, "\\v") == 0) {
+            return "\v";
+       }
+    } else {
+        return &str[1];
+    }
+}
 
 
