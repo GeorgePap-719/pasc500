@@ -141,11 +141,7 @@ constant: T_ICONST
 
 setexpression: T_LBRACK elexpressions T_RBRACK
         | T_LBRACK T_RBRACK
-        | error     elexpressions T_RBRACK       { yyerror("Wrong use of set expression"); yyerrok; }
-        | T_LBRACK  error         T_RBRACK 	 { yyerror("Wrong use of set expression"); yyerrok; }
-        | T_LBRACK  elexpressions error		 { yyerror("Wrong use of set expression"); yyerrok; }
-        | error    T_RBRACK			 { yyerror("Wrong use of set expression"); yyerrok; }
-        | T_LBRACK error			 { yyerror("Wrong use of set expression"); yyerrok; }
+
 
 elexpressions: elexpressions T_COMMA elexpression
         | elexpression
