@@ -72,13 +72,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "hashtbl.h"
 
 extern FILE *yyin;
 extern int yylex();
 extern void yyerror(const char* error);
 
+HASHTBL *hashtbl;
+int scope = 0;
 
-#line 82 "syntax.tab.c"
+
+#line 86 "syntax.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -581,19 +585,19 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    97,    97,    99,   100,   101,   102,   104,   106,   107,
-     109,   110,   112,   113,   114,   115,   116,   117,   118,   119,
-     120,   121,   122,   123,   124,   126,   127,   128,   130,   131,
-     133,   134,   135,   136,   138,   139,   140,   141,   142,   143,
-     144,   146,   147,   149,   150,   152,   153,   155,   156,   158,
-     159,   160,   161,   162,   164,   165,   167,   168,   170,   171,
-     172,   173,   174,   175,   177,   178,   180,   180,   180,   180,
-     182,   183,   185,   187,   188,   190,   191,   193,   194,   196,
-     197,   199,   200,   202,   203,   204,   206,   207,   209,   210,
-     212,   212,   214,   216,   217,   219,   220,   221,   222,   223,
-     224,   225,   226,   227,   230,   231,   232,   233,   234,   235,
-     236,   239,   241,   242,   244,   246,   248,   249,   251,   253,
-     254,   256,   257,   259,   260,   262,   264,   265,   267,   268
+       0,   101,   101,   103,   104,   105,   106,   108,   110,   111,
+     113,   114,   116,   117,   118,   119,   120,   121,   122,   123,
+     124,   125,   126,   127,   128,   130,   131,   132,   134,   135,
+     137,   138,   139,   140,   142,   143,   144,   145,   146,   147,
+     148,   150,   151,   153,   154,   156,   157,   159,   160,   162,
+     163,   164,   165,   166,   168,   169,   171,   172,   174,   175,
+     176,   177,   178,   179,   181,   182,   184,   184,   184,   184,
+     186,   187,   189,   191,   192,   194,   195,   197,   198,   200,
+     201,   203,   204,   206,   207,   208,   210,   211,   213,   214,
+     216,   216,   218,   220,   221,   223,   224,   225,   226,   227,
+     228,   229,   230,   231,   234,   235,   236,   237,   238,   239,
+     240,   243,   245,   246,   248,   250,   252,   253,   255,   257,
+     258,   260,   261,   263,   264,   266,   268,   269,   271,   272
 };
 #endif
 
@@ -1648,85 +1652,85 @@ yyreduce:
   switch (yyn)
     {
   case 4: /* header: error "id" ";"  */
-#line 100 "syntax.y"
+#line 104 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1654 "syntax.tab.c"
+#line 1658 "syntax.tab.c"
     break;
 
   case 5: /* header: "program" error ";"  */
-#line 101 "syntax.y"
+#line 105 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1660 "syntax.tab.c"
+#line 1664 "syntax.tab.c"
     break;
 
   case 6: /* header: "program" "id" error  */
-#line 102 "syntax.y"
+#line 106 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1666 "syntax.tab.c"
+#line 1670 "syntax.tab.c"
     break;
 
   case 36: /* setexpression: error elexpressions "]"  */
-#line 140 "syntax.y"
+#line 144 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1672 "syntax.tab.c"
+#line 1676 "syntax.tab.c"
     break;
 
   case 37: /* setexpression: "[" error "]"  */
-#line 141 "syntax.y"
+#line 145 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1678 "syntax.tab.c"
+#line 1682 "syntax.tab.c"
     break;
 
   case 38: /* setexpression: "[" elexpressions error  */
-#line 142 "syntax.y"
+#line 146 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1684 "syntax.tab.c"
+#line 1688 "syntax.tab.c"
     break;
 
   case 39: /* setexpression: error "]"  */
-#line 143 "syntax.y"
+#line 147 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1690 "syntax.tab.c"
+#line 1694 "syntax.tab.c"
     break;
 
   case 40: /* setexpression: "[" error  */
-#line 144 "syntax.y"
+#line 148 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1696 "syntax.tab.c"
+#line 1700 "syntax.tab.c"
     break;
 
   case 106: /* assignment: error ":=" expression  */
-#line 232 "syntax.y"
+#line 236 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1702 "syntax.tab.c"
+#line 1706 "syntax.tab.c"
     break;
 
   case 107: /* assignment: variable error expression  */
-#line 233 "syntax.y"
+#line 237 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1708 "syntax.tab.c"
+#line 1712 "syntax.tab.c"
     break;
 
   case 108: /* assignment: error ":=" "string"  */
-#line 234 "syntax.y"
+#line 238 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1714 "syntax.tab.c"
+#line 1718 "syntax.tab.c"
     break;
 
   case 109: /* assignment: variable error "string"  */
-#line 235 "syntax.y"
+#line 239 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1720 "syntax.tab.c"
+#line 1724 "syntax.tab.c"
     break;
 
   case 110: /* assignment: variable ":=" error  */
-#line 236 "syntax.y"
+#line 240 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1726 "syntax.tab.c"
+#line 1730 "syntax.tab.c"
     break;
 
 
-#line 1730 "syntax.tab.c"
+#line 1734 "syntax.tab.c"
 
       default: break;
     }
@@ -1951,11 +1955,16 @@ yyreturn:
   return yyresult;
 }
 
-#line 270 "syntax.y"
+#line 274 "syntax.y"
 
 
 int main(int argc, char* argv[]) {
  int token;
+
+    if (!(hashtbl = hashtbl_create(10, NULL))) {
+    	puts("Error, failed to initialize hashtbale");
+    	exit(EXIT_FAILURE);
+    }
 
     if(argc > 1){
         yyin = fopen(argv[1], "r");
@@ -1969,6 +1978,7 @@ int main(int argc, char* argv[]) {
     printf("Program analyzed successfully\n");
 
     fclose(yyin);
+    hashtbl_destroy(hashtbl);
     return 0;
 }
 

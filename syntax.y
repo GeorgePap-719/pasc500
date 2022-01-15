@@ -2,10 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "hashtbl.h"
 
 extern FILE *yyin;
 extern int yylex();
 extern void yyerror(const char* error);
+
+HASHTBL *hashtbl;
+int scope = 0;
 
 %}
 
@@ -272,6 +276,11 @@ write_item: expression
 int main(int argc, char* argv[]) {
  int token;
 
+    if (!(hashtbl = hashtbl_create(10, NULL))) {
+    	puts("Error, failed to initialize hashtbale");
+    	exit(EXIT_FAILURE);
+    }
+
     if(argc > 1){
         yyin = fopen(argv[1], "r");
         if (yyin == NULL){
@@ -284,6 +293,7 @@ int main(int argc, char* argv[]) {
     printf("Program analyzed successfully\n");
 
     fclose(yyin);
+    hashtbl_destroy(hashtbl);
     return 0;
 }
 
