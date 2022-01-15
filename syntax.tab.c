@@ -1651,86 +1651,206 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 3: /* header: "program" "id" ";"  */
+#line 103 "syntax.y"
+                                        { hashtbl_insert(hashtbl, (yyvsp[-1].strval), NULL, scope); }
+#line 1658 "syntax.tab.c"
+    break;
+
   case 4: /* header: error "id" ";"  */
 #line 104 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1658 "syntax.tab.c"
+#line 1664 "syntax.tab.c"
     break;
 
   case 5: /* header: "program" error ";"  */
 #line 105 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1664 "syntax.tab.c"
+#line 1670 "syntax.tab.c"
     break;
 
   case 6: /* header: "program" "id" error  */
 #line 106 "syntax.y"
                                         { yyerror("Wrong use of headers"); yyerrok; }
-#line 1670 "syntax.tab.c"
+#line 1676 "syntax.tab.c"
+    break;
+
+  case 10: /* constant_defs: constant_defs ";" "id" "=" expression  */
+#line 113 "syntax.y"
+                                                          { hashtbl_insert(hashtbl, (yyvsp[-2].strval), NULL, scope); }
+#line 1682 "syntax.tab.c"
+    break;
+
+  case 11: /* constant_defs: "id" "=" expression  */
+#line 114 "syntax.y"
+                                                          { hashtbl_insert(hashtbl, (yyvsp[-2].strval), NULL, scope); }
+#line 1688 "syntax.tab.c"
+    break;
+
+  case 21: /* expression: "id" "(" expressions ")"  */
+#line 125 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[-3].strval), NULL, scope); }
+#line 1694 "syntax.tab.c"
+    break;
+
+  case 25: /* variable: "id"  */
+#line 130 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1700 "syntax.tab.c"
+    break;
+
+  case 26: /* variable: variable "." "id"  */
+#line 131 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1706 "syntax.tab.c"
     break;
 
   case 36: /* setexpression: error elexpressions "]"  */
 #line 144 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1676 "syntax.tab.c"
+#line 1712 "syntax.tab.c"
     break;
 
   case 37: /* setexpression: "[" error "]"  */
 #line 145 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1682 "syntax.tab.c"
+#line 1718 "syntax.tab.c"
     break;
 
   case 38: /* setexpression: "[" elexpressions error  */
 #line 146 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1688 "syntax.tab.c"
+#line 1724 "syntax.tab.c"
     break;
 
   case 39: /* setexpression: error "]"  */
 #line 147 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1694 "syntax.tab.c"
+#line 1730 "syntax.tab.c"
     break;
 
   case 40: /* setexpression: "[" error  */
 #line 148 "syntax.y"
                                                  { yyerror("Wrong use of set expression"); yyerrok; }
-#line 1700 "syntax.tab.c"
+#line 1736 "syntax.tab.c"
+    break;
+
+  case 47: /* type_defs: type_defs ";" "id" "=" type_def  */
+#line 159 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[-2].strval), NULL, scope); }
+#line 1742 "syntax.tab.c"
+    break;
+
+  case 48: /* type_defs: "id" "=" type_def  */
+#line 160 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1748 "syntax.tab.c"
+    break;
+
+  case 57: /* limits: "id"  */
+#line 172 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1754 "syntax.tab.c"
+    break;
+
+  case 59: /* limit: "+ or -" "id"  */
+#line 175 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1760 "syntax.tab.c"
+    break;
+
+  case 63: /* limit: "id"  */
+#line 179 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1766 "syntax.tab.c"
+    break;
+
+  case 65: /* typename: "id"  */
+#line 182 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1772 "syntax.tab.c"
+    break;
+
+  case 73: /* identifiers: identifiers "," "id"  */
+#line 191 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1778 "syntax.tab.c"
+    break;
+
+  case 74: /* identifiers: "id"  */
+#line 192 "syntax.y"
+                                                { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1784 "syntax.tab.c"
+    break;
+
+  case 83: /* sub_header: "function" "id" formal_parameters ":" standard_type  */
+#line 206 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[-3].strval), NULL, scope); }
+#line 1790 "syntax.tab.c"
+    break;
+
+  case 84: /* sub_header: "procedure" "id" formal_parameters  */
+#line 207 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[-1].strval), NULL, scope); }
+#line 1796 "syntax.tab.c"
+    break;
+
+  case 85: /* sub_header: "function" "id"  */
+#line 208 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1802 "syntax.tab.c"
     break;
 
   case 106: /* assignment: error ":=" expression  */
 #line 236 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1706 "syntax.tab.c"
+#line 1808 "syntax.tab.c"
     break;
 
   case 107: /* assignment: variable error expression  */
 #line 237 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1712 "syntax.tab.c"
+#line 1814 "syntax.tab.c"
     break;
 
   case 108: /* assignment: error ":=" "string"  */
 #line 238 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1718 "syntax.tab.c"
+#line 1820 "syntax.tab.c"
     break;
 
   case 109: /* assignment: variable error "string"  */
 #line 239 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1724 "syntax.tab.c"
+#line 1826 "syntax.tab.c"
     break;
 
   case 110: /* assignment: variable ":=" error  */
 #line 240 "syntax.y"
                                          { yyerror("Wrong use of assignment"); yyerrok; }
-#line 1730 "syntax.tab.c"
+#line 1832 "syntax.tab.c"
+    break;
+
+  case 115: /* for_statement: "for" "id" ":=" iter_space "do" statement  */
+#line 250 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[-4].strval), NULL, scope); }
+#line 1838 "syntax.tab.c"
+    break;
+
+  case 119: /* subprogram_call: "id"  */
+#line 257 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[0].strval), NULL, scope); }
+#line 1844 "syntax.tab.c"
+    break;
+
+  case 120: /* subprogram_call: "id" "(" expressions ")"  */
+#line 258 "syntax.y"
+                                                                        { hashtbl_insert(hashtbl, (yyvsp[-3].strval), NULL, scope); }
+#line 1850 "syntax.tab.c"
     break;
 
 
-#line 1734 "syntax.tab.c"
+#line 1854 "syntax.tab.c"
 
       default: break;
     }

@@ -100,7 +100,7 @@ int scope = 0;
 
 program:  header declarations subprograms comp_statement T_DOT
 
-header: T_PROGRAM   T_ID    T_SEMI
+header: T_PROGRAM   T_ID    T_SEMI	{ hashtbl_insert(hashtbl, $2, NULL, scope); }
 	| error     T_ID    T_SEMI      { yyerror("Wrong use of headers"); yyerrok; }
 	| T_PROGRAM error   T_SEMI	{ yyerror("Wrong use of headers"); yyerrok; }
 	| T_PROGRAM T_ID    error	{ yyerror("Wrong use of headers"); yyerrok; }
@@ -110,8 +110,8 @@ declarations: constdefs typedefs vardefs
 constdefs: T_CONST constant_defs T_SEMI
         | %empty
 
-constant_defs: constant_defs T_SEMI T_ID T_EQU expression
-        | T_ID T_EQU expression
+constant_defs: constant_defs T_SEMI T_ID T_EQU expression { hashtbl_insert(hashtbl, $3, NULL, scope); }
+        | T_ID T_EQU expression				  { hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 expression: expression T_RELOP expression
         | expression T_EQU expression
@@ -122,13 +122,13 @@ expression: expression T_RELOP expression
         | T_ADDOP expression
         | T_NOTOP expression
         | variable
-        | T_ID T_LPAREN expressions T_RPAREN
+        | T_ID T_LPAREN expressions T_RPAREN	{ hashtbl_insert(hashtbl, $1, NULL, scope); }
         | constant
         | T_LPAREN expression T_RPAREN
         | setexpression
 
-variable: T_ID
-        | variable T_DOT T_ID
+variable: T_ID					{ hashtbl_insert(hashtbl, $1, NULL, scope); }
+        | variable T_DOT T_ID			{ hashtbl_insert(hashtbl, $3, NULL, scope); }
         | variable T_LBRACK expressions T_RBRACK
 
 expressions: expressions T_COMMA expression
@@ -156,8 +156,8 @@ elexpression: expression T_DOTDOT expression
 typedefs: T_TYPE type_defs T_SEMI
         | %empty
 
-type_defs: type_defs T_SEMI T_ID T_EQU type_def
-        | T_ID T_EQU type_def
+type_defs: type_defs T_SEMI T_ID T_EQU type_def	{ hashtbl_insert(hashtbl, $3, NULL, scope); }
+        | T_ID T_EQU type_def			{ hashtbl_insert(hashtbl, $3, NULL, scope); }
 
 type_def: T_ARRAY T_LBRACK dims T_RBRACK T_OF typename
         | T_SET T_OF typename
@@ -169,17 +169,17 @@ dims: dims T_COMMA limits
         | limits
 
 limits: limit T_DOTDOT limit
-        | T_ID
+        | T_ID					{ hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 limit: T_ADDOP T_ICONST
-        | T_ADDOP T_ID
+        | T_ADDOP T_ID				{ hashtbl_insert(hashtbl, $2, NULL, scope); }
         | T_ICONST
         | T_CCONST
         | T_BCONST
-        | T_ID
+        | T_ID					{ hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 typename: standard_type
-        | T_ID
+        | T_ID					{ hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 standard_type: T_INTEGER | T_REAL | T_BOOLEAN | T_CHAR
 
@@ -188,8 +188,8 @@ fields: fields T_SEMI field
 
 field: identifiers T_COLON typename
 
-identifiers: identifiers T_COMMA T_ID
-        | T_ID
+identifiers: identifiers T_COMMA T_ID		{ hashtbl_insert(hashtbl, $3, NULL, scope); }
+        | T_ID					{ hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 vardefs: T_VAR variable_defs T_SEMI
         | %empty
@@ -203,9 +203,9 @@ subprograms: subprograms subprogram T_SEMI
 subprogram: sub_header T_SEMI T_FORWARD
         | sub_header T_SEMI declarations subprograms comp_statement
 
-sub_header: T_FUNCTION T_ID formal_parameters T_COLON standard_type
-        | T_PROCEDURE T_ID formal_parameters
-        | T_FUNCTION T_ID
+sub_header: T_FUNCTION T_ID formal_parameters T_COLON standard_type	{ hashtbl_insert(hashtbl, $2, NULL, scope); }
+        | T_PROCEDURE T_ID formal_parameters				{ hashtbl_insert(hashtbl, $2, NULL, scope); }
+        | T_FUNCTION T_ID						{ hashtbl_insert(hashtbl, $2, NULL, scope); }
 
 formal_parameters: T_LPAREN parameter_list T_RPAREN
         | %empty
@@ -247,15 +247,15 @@ if_tail: T_ELSE statement
 
 while_statement: T_WHILE expression T_DO statement
 
-for_statement: T_FOR T_ID T_ASSIGN iter_space T_DO statement
+for_statement: T_FOR T_ID T_ASSIGN iter_space T_DO statement		{ hashtbl_insert(hashtbl, $2, NULL, scope); }
 
 iter_space: expression T_TO expression
         | expression T_DOWNTO expression
 
 with_statement: T_WITH variable T_DO statement
 
-subprogram_call: T_ID
-        | T_ID T_LPAREN expressions T_RPAREN
+subprogram_call: T_ID							{ hashtbl_insert(hashtbl, $1, NULL, scope); }
+        | T_ID T_LPAREN expressions T_RPAREN				{ hashtbl_insert(hashtbl, $1, NULL, scope); }
 
 io_statement: T_READ T_LPAREN read_list T_RPAREN
         | T_WRITE T_LPAREN write_list T_RPAREN
