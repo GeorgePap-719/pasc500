@@ -94,9 +94,12 @@ extern void yyerror(const char* error);
 %%
 
 
-program: header declarations subprograms comp_statement T_DOT
+program:  header declarations subprograms comp_statement T_DOT
 
-header: T_PROGRAM T_ID T_SEMI
+header: T_PROGRAM   T_ID    T_SEMI
+	| error     T_ID    T_SEMI      { yyerror("Wrong use of headers"); yyerrok; }
+	| T_PROGRAM error   T_SEMI	{ yyerror("Wrong use of headers"); yyerrok; }
+	| T_PROGRAM T_ID    error	{ yyerror("Wrong use of headers"); yyerrok; }
 
 declarations: constdefs typedefs vardefs
 
@@ -134,6 +137,11 @@ constant: T_ICONST
 
 setexpression: T_LBRACK elexpressions T_RBRACK
         | T_LBRACK T_RBRACK
+        | error     elexpressions T_RBRACK       { yyerror("Wrong use of set expression"); yyerrok; }
+        | T_LBRACK  error         T_RBRACK 	 { yyerror("Wrong use of set expression"); yyerrok; }
+        | T_LBRACK  elexpressions error		 { yyerror("Wrong use of set expression"); yyerrok; }
+        | error    T_RBRACK			 { yyerror("Wrong use of set expression"); yyerrok; }
+        | T_LBRACK error			 { yyerror("Wrong use of set expression"); yyerrok; }
 
 elexpressions: elexpressions T_COMMA elexpression
         | elexpression
@@ -218,8 +226,15 @@ statement: assignment
         | comp_statement
         | %empty
 
+
 assignment: variable T_ASSIGN expression
-        | variable T_ASSIGN T_STRING
+        | variable   T_ASSIGN T_STRING
+	| error      T_ASSIGN expression { yyerror("Wrong use of assignment"); yyerrok; }
+	| variable   error    expression { yyerror("Wrong use of assignment"); yyerrok; }
+        | error      T_ASSIGN T_STRING   { yyerror("Wrong use of assignment"); yyerrok; }
+        | variable   error    T_STRING   { yyerror("Wrong use of assignment"); yyerrok; }
+        | variable   T_ASSIGN error      { yyerror("Wrong use of assignment"); yyerrok; }
+
 
 if_statement: T_IF expression T_THEN statement if_tail
 
