@@ -1,0 +1,24 @@
+State 70 conflicts: 6 shift/reduce
+State 71 conflicts: 6 shift/reduce
+State 123 conflicts: 6 shift/reduce
+State 124 conflicts: 6 shift/reduce
+State 125 conflicts: 6 shift/reduce
+State 126 conflicts: 6 shift/reduce
+State 127 conflicts: 6 shift/reduce
+State 128 conflicts: 6 shift/reduce
+State 180 conflicts: 1 shift/reduce
+
+State 70, 71, 123, 124, 125, 126, 127, 128 :
+    Οι 8 συγκρούσεις αφορούν τους σχεσιακούς
+και λογικούς τελεστές (and, or, rel) και
+τους αριθμητικούς (add, mul, div) οπού
+το πρόβλημα λύνεται με την αριστερή
+προσετεριστικότητα.
+
+State 180:
+   Η σύγκρουση 180 έχει να κάνει με το πρόβλημα το ξεκρέμαστο
+else σε ενα if else δηλαδή και ως γνωστό dangling else.
+Για παραπάνω πληροφορίες μπορούμε να δούμε εδω : https://en.wikipedia.org/wiki/Dangling_else
+Το πρόβλημα αυτό λύνεται με το %nonassoc LOWER_THAN_ELSE δηλαδή πάλι με την
+προτεραιότητα/προσετεριστικότητα. Στην ουσία συσχετίζουμε το else με το
+κοντινότερο if.
