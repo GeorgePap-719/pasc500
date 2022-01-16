@@ -83,7 +83,7 @@ int scope = 0;
 
 %token T_EOF  0     "EOF"
 
-/*
+/* This will be resolved in the semantic analysis of the compiler
 %type <strval> program header declarations constdefs constant_defs expression variable expressions constant setexpression elexpressions elexpression typedefs type_defs type_def dims limits limit typename standard_type fields field identifiers vardefs variable_defs subprograms subprogram sub_header formal_parameters parameter_list pass comp_statement statements statement assignment if_statement if_tail while_statement for_statement iter_space with_statement subprogram_call io_statement read_list read_item write_list write_item
 */
 
@@ -100,7 +100,7 @@ int scope = 0;
 %%
 
 
-program:  header declarations subprograms comp_statement T_DOT
+program:  header { scope++; } declarations subprograms comp_statement T_DOT { hashtbl_get(hashtbl, scope--); }
 	;
 
 header: T_PROGRAM   T_ID    T_SEMI	{ hashtbl_insert(hashtbl, $2, NULL, scope); }
@@ -244,7 +244,7 @@ parameter_list: parameter_list T_SEMI pass identifiers T_COLON typename
 pass: T_VAR | %empty
 	;
 
-comp_statement: T_BEGIN statements T_END
+comp_statement: T_BEGIN { scope++; } statements T_END 	{ hashtbl_get(hashtbl, scope--); }
 	;
 
 statements: statements T_SEMI statement
@@ -273,17 +273,18 @@ assignment: variable T_ASSIGN expression
         ;
 
 
-if_statement: T_IF expression T_THEN statement if_tail
+if_statement: T_IF expression T_THEN { scope++; } statement if_tail { hashtbl_get(hashtbl, scope--); }
 	;
 
 if_tail: T_ELSE statement
         | %empty %prec LOWER_THAN_ELSE
         ;
 
-while_statement: T_WHILE expression T_DO statement
+while_statement: T_WHILE expression T_DO { scope++; } statement { hashtbl_get(hashtbl, scope--); }
 	;
 
-for_statement: T_FOR T_ID T_ASSIGN iter_space T_DO statement		{ hashtbl_insert(hashtbl, $2, NULL, scope); }
+for_statement: T_FOR T_ID T_ASSIGN iter_space T_DO { scope++; } statement { hashtbl_insert(hashtbl, $2, NULL, scope);
+ 										hashtbl_get(hashtbl, scope--); }
 	;
 
 iter_space: expression T_TO expression
