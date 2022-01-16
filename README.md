@@ -8,15 +8,8 @@ a simple compiler
 
 ~~~
 flex compiler.l
-gcc lex.yy.c -lm
-./a.out test2.p
-~~~
-
-- bison
-
-~~~
-flex compiler.l
 bison -v -d syntax.y 
-gcc syntax.tab.c lex.yy.c -lm
-./a.out test2.p
+gcc -o hashtbl.o -c hashtbl.c
+gcc syntax.tab.c lex.yy.c hashtbl.o -lm
+./a.out pasc500test1.p
 ~~~

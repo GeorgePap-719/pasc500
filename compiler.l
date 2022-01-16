@@ -181,11 +181,9 @@ alphanumu         [a-zA-z0-9_]
 %%
 
 void token_print(int token_id) {
-
     if (FLEX_DEBUG == 0) {
         return;
     }
-
     if (token_id == T_ICONST) {
         printf("[Line %d] INTEGER TOKEN \'%s\' (%d). Base 10: %d\n", yylineno, yytext, token_id, str_to_int(yytext));
     } else if (token_id == T_RCONST) {
